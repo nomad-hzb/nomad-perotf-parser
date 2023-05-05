@@ -19,7 +19,7 @@
 from nomad.datamodel import EntryArchive
 from nomad.parsing import MatchingParser
 
-from hysprint import HySprint_108_HyVap_JVmeasurement
+from hysprint_s import HySprint_108_HyVap_JVmeasurement
 
 from baseclasses.helper.jv_archive import get_jv_archive
 from baseclasses.helper.jv_parser import get_jv_data

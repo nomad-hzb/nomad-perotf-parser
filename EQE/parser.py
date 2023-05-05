@@ -19,7 +19,7 @@
 from nomad.datamodel import EntryArchive
 from nomad.parsing import MatchingParser
 
-from hysprint import HySprint_108_HyVap_EQEmeasurement
+from hysprint_s import HySprint_108_HyVap_EQEmeasurement
 
 from nomad.datamodel.metainfo.eln import SolarCellEQE
 from baseclasses.helper.eqe_archive import get_eqe_archive
