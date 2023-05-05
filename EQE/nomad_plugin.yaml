@@ -1,0 +1,7 @@
+plugin_type: parser
+name: parsers/hysprint
+description: |
+  This is a eqe parser for hysprint.
+mainfile_name_re: ^(.*\.?(eqe\.txt))$
+parser_class_name: EQE.EQEParser
+code_name: Hysprint EQE code

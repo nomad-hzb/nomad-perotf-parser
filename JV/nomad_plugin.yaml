@@ -1,0 +1,7 @@
+plugin_type: parser
+name: parsers/hysprint
+description: |
+  This is a jv parser for hysprint.
+mainfile_name_re: ^(.*\.?(jv\.txt))$
+parser_class_name: JV.JVParser
+code_name: Hysprint JV code
