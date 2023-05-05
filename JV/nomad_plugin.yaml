@@ -1,5 +1,5 @@
 plugin_type: parser
-name: parsers/hysprint
+name: parsers/hysprint_jv
 description: |
   This is a jv parser for hysprint.
 mainfile_name_re: ^(.*\.?(jv\.txt))$
