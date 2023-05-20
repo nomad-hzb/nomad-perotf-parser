@@ -25,6 +25,9 @@ from nomad.datamodel.metainfo.eln import SolarCellEQE
 from baseclasses.helper.eqe_archive import get_eqe_archive
 from baseclasses.helper.eqe_parser import EQEAnalyzer
 
+from baseclasses.helper.utilities import set_sample_reference, create_archive
+
+
 import json
 import os
 import datetime
@@ -57,20 +60,8 @@ class EQEParser(MatchingParser):
         get_eqe_archive(eqe_dict, mainfile, sc_eqe, logger)
 
         archive.metadata.entry_name = os.path.basename(mainfile)
-
-        from nomad.search import search
         search_id = mainfile_split[0]
-        query = {
-            'results.eln.lab_ids': search_id
-        }
-        search_result = search(
-            owner='all',
-            query=query,
-            user_id=archive.metadata.main_author.user_id)
-        if len(search_result.data) == 1:
-            data = search_result.data[0]
-            upload_id, entry_id = data["upload_id"], data["entry_id"]
-            eqem.samples = [f'../uploads/{upload_id}/archive/{entry_id}#data']
+        set_sample_reference(archive, eqem, search_id)
 
         eqem.name = f"{search_id} {notes}"
         eqem.description = f"Notes from file name: {notes}"
@@ -81,8 +72,4 @@ class EQEParser(MatchingParser):
         eqem.eqe_data = [sc_eqe]
 
         file_name = f'{os.path.basename(mainfile)}.archive.json'
-        if not archive.m_context.raw_path_exists(file_name):
-            eqem_entry = eqem.m_to_dict(with_root_def=True)
-            with archive.m_context.raw_file(file_name, 'w') as outfile:
-                json.dump({"data": eqem_entry}, outfile)
-            archive.m_context.process_updated_raw_file(file_name)
+        create_archive(eqem, archive, file_name)

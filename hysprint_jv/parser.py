@@ -24,7 +24,12 @@ from hysprint_s import HySprint_108_HyVap_JVmeasurement
 from baseclasses.helper.jv_archive import get_jv_archive
 from baseclasses.helper.jv_parser import get_jv_data
 
-import json, os, datetime
+from baseclasses.helper.utilities import set_sample_reference, create_archive
+
+
+import json
+import os
+import datetime
 
 '''
 This is a hello world style example for an example parser/converter.
@@ -40,43 +45,28 @@ class JVParser(MatchingParser):
 
     def parse(self, mainfile: str, archive: EntryArchive, logger):
         # Log a hello world, just to get us started. TODO remove from an actual parser.
-        
+
         from baseclasses.helper.utilities import get_encoding
         with open(mainfile, "br") as f:
             encoding = get_encoding(f)
-        
+
         mainfile_split = os.path.basename(mainfile).split('.')
         notes = ''
         if len(mainfile_split) > 2:
             notes = mainfile_split[1]
-        
+
         jv_dict = get_jv_data(mainfile, encoding)
         jvm = HySprint_108_HyVap_JVmeasurement()
         get_jv_archive(jv_dict, mainfile, jvm)
 
         archive.metadata.entry_name = os.path.basename(mainfile)
-        from nomad.search import search
         search_id = mainfile_split[0]
-        query = {
-            'results.eln.lab_ids': search_id
-        }
-        search_result = search(
-            owner='all',
-            query=query,
-            user_id=archive.metadata.main_author.user_id)
-        if len(search_result.data) == 1:
-            data = search_result.data[0]
-            upload_id, entry_id = data["upload_id"], data["entry_id"]
-            jvm.samples = [f'../uploads/{upload_id}/archive/{entry_id}#data']
-        
+        set_sample_reference(archive, jvm, search_id)
+
         jvm.name = f"{search_id} {notes}"
         jvm.description = f"Notes from file name: {notes}"
         jvm.data_file = os.path.basename(mainfile)
         jvm.datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
 
         file_name = f'{os.path.basename(mainfile)}.archive.json'
-        if not archive.m_context.raw_path_exists(file_name):
-            jvm_entry = jvm.m_to_dict(with_root_def=True)
-            with archive.m_context.raw_file(file_name, 'w') as outfile:
-                json.dump({"data": jvm_entry}, outfile)
-            archive.m_context.process_updated_raw_file(file_name)
+        create_archive(jvm, archive, file_name)

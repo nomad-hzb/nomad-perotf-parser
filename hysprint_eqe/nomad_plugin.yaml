@@ -3,5 +3,5 @@ name: parsers/hysprint_eqe
 description: |
   This is a eqe parser for hysprint.
 mainfile_name_re: ^(.*\.?(eqe\.txt))$
-parser_class_name: EQE.EQEParser
+parser_class_name: hysprint_eqe.EQEParser
 code_name: Hysprint EQE code
