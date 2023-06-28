@@ -32,8 +32,8 @@ from hysprint_s import (IRIS_2038_HZBGloveBoxes_Pero4SOSIMStorage_JVmeasurement,
 from nomad.datamodel.metainfo.eln import SolarCellEQE
 
 
-from baseclasses.helper.jv_archive import get_jv_archive
-from baseclasses.helper.jv_parser import get_jv_data
+from baseclasses.helper.archive_builder.jv_archive import get_jv_archive
+from baseclasses.helper.file_parser.jv_parser import get_jv_data
 
 from baseclasses.helper.utilities import set_sample_reference, create_archive
 
