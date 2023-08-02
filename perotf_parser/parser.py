@@ -53,16 +53,16 @@ class PeroTFParser(MatchingParser):
         if len(mainfile_split) > 2:
             notes = mainfile_split[1]
         entry = peroTF_Measurement()
-        if mainfile_split[-1] == "txt" and mainfile_split[-2] == "jv":
+        if mainfile_split[-1] == "csv" and mainfile_split[-2] == "jv":
             entry = peroTF_CR_SolSimBox_JVmeasurement()
-        if mainfile_split[-1] == "txt" and mainfile_split[-2] == "eqe":
+        if mainfile_split[-1] == "dat" and mainfile_split[-2] == "eqe":
             header_lines = 9
             sc_eqe = SolarCellEQE()
             sc_eqe.eqe_data_file = os.path.basename(mainfile)
             sc_eqe.header_lines = header_lines
             entry = peroTF_TFL_GammaBox_EQEmeasurement()
             entry.eqe_data = [sc_eqe]
-        if mainfile_split[-1] == "txt" and mainfile_split[-2] == "jvg":
+        if mainfile_split[-1] == "csv" and mainfile_split[-2] == "jvg":
             entry = peroTF_TFL_GammaBox_JVmeasurement()
         if mainfile_split[-1] == "csv" and mainfile_split[-2] == "mpp":
             entry = peroTF_CR_SolSimBox_MPPTracking()
