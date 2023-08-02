@@ -19,11 +19,11 @@
 from nomad.datamodel import EntryArchive
 from nomad.parsing import MatchingParser
 
-from kit_perotf_s import (peroTF_CR_SolSimBox_JVmeasurement,
-                          peroTF_CR_SolSimBox_MPPTracking,
-                          peroTF_TFL_GammaBox_JVmeasurement,
-                          peroTF_TFL_GammaBox_EQEmeasurement,
-                          peroTF_Measurement)
+from perotf_s import (peroTF_CR_SolSimBox_JVmeasurement,
+                      peroTF_CR_SolSimBox_MPPTracking,
+                      peroTF_TFL_GammaBox_JVmeasurement,
+                      peroTF_TFL_GammaBox_EQEmeasurement,
+                      peroTF_Measurement)
 
 from nomad.datamodel.metainfo.eln import SolarCellEQE
 
