@@ -38,7 +38,7 @@ This is a hello world style example for an example parser/converter.
 '''
 
 
-class HySprintParser(MatchingParser):
+class PeroTFParser(MatchingParser):
     def __init__(self):
         super().__init__(
             name='parsers/hysprintjv', code_name='HYSPRINTJV', code_homepage='https://www.example.eu/',

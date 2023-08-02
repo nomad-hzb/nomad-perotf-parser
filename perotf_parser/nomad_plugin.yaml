@@ -1,7 +1,7 @@
 plugin_type: parser
-name: parsers/hysprint_parser
+name: parsers/perotf_parser
 description: |
-  This is a parser for hysprint data.
+  This is a parser for peroTF data.
 mainfile_name_re: ^(.+\.?.+\.((eqe|jv|jvg|mpp|pero)\..{1,4}))$
-parser_class_name: hysprint_parser.HySprintParser
-code_name: Hysprint code
+parser_class_name: perotf_parser.PeroTFParser
+code_name: peroTF code
