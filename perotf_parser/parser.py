@@ -57,7 +57,7 @@ class PeroTFParser(MatchingParser):
         if mainfile_split[-1] == "csv" and mainfile_split[-2] == "jv":
             entry = peroTF_CR_SolSimBox_JVmeasurement()
         if mainfile_split[-1] == "dat" and mainfile_split[-2] == "eqe":
-            header_lines = 126
+            header_lines = 63
             sc_eqe = SolarCellEQE()
             sc_eqe.eqe_data_file = os.path.basename(mainfile)
             sc_eqe.header_lines = header_lines
