@@ -67,7 +67,15 @@ class PeroTFParser(MatchingParser):
             entry = peroTF_TFL_GammaBox_JVmeasurement()
         if mainfile_split[-1] == "csv" and mainfile_split[-2] == "mpp":
             entry = peroTF_CR_SolSimBox_MPPTracking()
-
+        
+        if  mainfile_split[-2] in ["jv", "eqe", "jvg"] and len(mainfile_split) > 2:
+            if "top" in mainfile_split[1]:
+                entry.multijunction_position = "top"
+            if "mid" in mainfile_split[1]:
+                entry.multijunction_position = "mid"
+            if "bot" in mainfile_split[1]:
+                entry.multijunction_position = "bottom"
+        
         archive.metadata.entry_name = os.path.basename(mainfile)
         search_id = mainfile_split[0]
         set_sample_reference(archive, entry, search_id)
